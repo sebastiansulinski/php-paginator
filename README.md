@@ -1,7 +1,5 @@
 # Framework agnostic PHP Pagination component
 
-## (Project under development!!!)
-
 Light weight, easy drop-in pagination component for PHP applications.
 
 ### Installation
