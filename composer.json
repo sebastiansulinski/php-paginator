@@ -1,5 +1,6 @@
 {
     "name": "sebastiansulinski/php-paginator",
+    "description": "Framework agnostic PHP Pagination component",
     "license": "MIT",
     "authors": [
         {
