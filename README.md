@@ -20,7 +20,7 @@ The component consist of 2 main classes:
     
 * `Paginator` - any class extending it - component comes with implementation of `SelectPaginator`, constructor of which takes:
     * instance of `Pagination`
-    * records for a given page
+    * records for a given page as instance of `SSD\Paginator\Collection` or `Illuminate\Support\Collection`
     
 To create your own implementations of `Pagination` simply use this class as parent and add required `html()` method.
 
