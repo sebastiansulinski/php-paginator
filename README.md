@@ -23,7 +23,7 @@ The component consist of 2 main classes:
     * instance of `Pagination`
     * records for a given page as instance of `SSD\Paginator\Collection` or `Illuminate\Support\Collection`
  
-Package comes with 2 implementation of `Paginator`:
+Package comes with 2 implementations of `Paginator`:
 
 * `SelectPaginator`
 * `VueSelectPaginator`
