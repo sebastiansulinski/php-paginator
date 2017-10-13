@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use SSD\Paginator\Collection;
 use SSD\Paginator\Pagination;
 
 class PaginationTest extends BaseCase
@@ -551,5 +552,28 @@ class PaginationTest extends BaseCase
         );
 
         $this->assertEquals('http://localhost/news?page=3', $pagination->nextUrl());
+    }
+
+    /**
+     * @test
+     */
+    public function returns_correct_url_list()
+    {
+        $pagination = new Pagination(
+            $this->get('/news'),
+            57,
+            10
+        );
+
+        $list = new Collection([
+            1 => 'http://localhost/news',
+            2 => 'http://localhost/news?page=2',
+            3 => 'http://localhost/news?page=3',
+            4 => 'http://localhost/news?page=4',
+            5 => 'http://localhost/news?page=5',
+            6 => 'http://localhost/news?page=6',
+        ]);
+
+        $this->assertEquals($list, $pagination->urlList());
     }
 }

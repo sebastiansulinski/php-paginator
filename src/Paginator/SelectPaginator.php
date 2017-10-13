@@ -102,25 +102,22 @@ class SelectPaginator extends Paginator
      */
     private function options(): string
     {
-        $options = [];
-
-        foreach(range(1, $this->pagination->numberOfPages()) as $page) {
-            $options[] = $this->option($page);
-        }
-
-        return implode($options);
+        return $this->pagination->urlList()->map(function(string $url, int $page) {
+            return $this->option($url, $page);
+        })->implode('');
     }
 
     /**
      * Get a single option.
      *
+     * @param  string $url
      * @param  int $page
      * @return string
      */
-    private function option(int $page): string
+    private function option(string $url, int $page): string
     {
         $option  = '<option value="';
-        $option .= $this->optionValue($page);
+        $option .= $url;
         $option .= '"';
         $option .= $this->selected($page);
         $option .= '>';
@@ -128,17 +125,6 @@ class SelectPaginator extends Paginator
         $option .= '</option>';
 
         return $option;
-    }
-
-    /**
-     * Get option value.
-     *
-     * @param  int $page
-     * @return string
-     */
-    private function optionValue(int $page): string
-    {
-        return $this->pagination->url($page);
     }
 
     /**

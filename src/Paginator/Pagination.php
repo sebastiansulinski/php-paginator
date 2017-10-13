@@ -434,4 +434,16 @@ class Pagination
 
         return $this->url($this->next);
     }
+
+    /**
+     * Get list of all urls.
+     *
+     * @return \SSD\Paginator\Collection
+     */
+    public function urlList(): Collection
+    {
+        return (new Collection(range(1, $this->numberOfPages())))->mapWithKeys(function(int $page) {
+            return [$page => $this->url($page)];
+        });
+    }
 }
