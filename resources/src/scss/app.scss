@@ -5,6 +5,8 @@ $paginator-font-size: 0.85rem;
 $paginator-disabled-bg: #dddddd;
 $paginator-label-bg: #cccccc;
 $paginator-label-color: #333333;
+$paginator-button-bg: #333333;
+$paginator-button-color: #ffffff;
 
 .ssd-paginator {
 
@@ -24,8 +26,8 @@ $paginator-label-color: #333333;
 
   .paginator-button {
 
-    background-color: $paginator-label-color;
-    color: $paginator-label-bg;
+    background-color: $paginator-button-bg;
+    color: $paginator-button-color !important;
 
   }
 

@@ -6,6 +6,7 @@ use SSD\Paginator\Request;
 use SSD\Paginator\Collection;
 use SSD\Paginator\Pagination;
 use SSD\Paginator\SelectPaginator;
+use SSD\Paginator\VueSelectPaginator;
 
 $pagination = new Pagination(
     Request::capture(),
@@ -21,7 +22,9 @@ $chunk = $records->splice(
     $pagination->limit()
 );
 
-$paginator = new SelectPaginator($pagination, $chunk);
+$selectPaginator = new SelectPaginator($pagination, $chunk);
+
+$vueSelectPaginator = new VueSelectPaginator($pagination, $chunk);
 
 ?>
 <!DOCTYPE html>
@@ -35,29 +38,76 @@ $paginator = new SelectPaginator($pagination, $chunk);
 </head>
 <body>
 
-<div class="container">
+<div id="app">
 
-    <nav class="panel">
-        <p class="panel-heading">
-            repositories
-        </p>
-        <?php foreach($paginator->records() as $record) { ?>
-        <a class="panel-block">
-            <span class="panel-icon">
-                <i class="fa fa-book"></i>
-            </span>
-            Record number <?php echo $record; ?>
-        </a>
-        <?php } ?>
-    </nav>
+    <section class="hero">
 
-    <div class="has-text-centered">
-        <?php echo $paginator->render(); ?>
-    </div>
+        <div class="hero-body">
+
+            <div class="container">
+
+                <h1 class="title">Using SelectPaginator with jQuery</h1>
+
+                <nav class="panel">
+                    <p class="panel-heading">
+                        repositories
+                    </p>
+                    <?php foreach($selectPaginator->records() as $record) { ?>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fa fa-book"></i>
+                        </span>
+                        Record number <?php echo $record; ?>
+                    </a>
+                    <?php } ?>
+                </nav>
+
+                <div class="has-text-centered">
+                    <?php echo $selectPaginator->render(); ?>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="hero">
+
+        <div class="hero-body">
+
+            <div class="container">
+
+                <h1 class="title">Using VueSelectPaginator with VueJs component</h1>
+
+                <nav class="panel">
+                    <p class="panel-heading">
+                        repositories
+                    </p>
+                    <?php foreach($vueSelectPaginator->records() as $record) { ?>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fa fa-book"></i>
+                        </span>
+                        Record number <?php echo $record; ?>
+                    </a>
+                    <?php } ?>
+                </nav>
+
+                <div class="has-text-centered">
+                    <?php echo $vueSelectPaginator->render(); ?>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="./resources/dist/js/app.js"></script>
 <script>
     $(function() {
         $('.ssd-paginator select').on('change', function() {
