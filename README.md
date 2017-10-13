@@ -1,6 +1,6 @@
 # Framework agnostic PHP Pagination component
 
-Light weight, easy drop-in pagination component for PHP applications.
+Light weight, easy drop-in pagination component for PHP 7 applications.
 
 ### Installation
 
@@ -18,16 +18,18 @@ The component consist of 2 main classes:
     * number of records per page
     * string key representing the query string parameter associated with the current page
     
-* `Paginator` - a parent class for any implementations that return the html structure of a pagination. Constructor of `Pagination` class implementation takes 2 arguments:
+* `Paginator` - a parent class for any implementations that return the html structure of a pagination. Its constructor takes 2 arguments:
 
     * instance of `Pagination`
     * records for a given page as instance of `SSD\Paginator\Collection` or `Illuminate\Support\Collection`
  
 Package comes with 2 implementation of `Paginator`:
 
-    * `SelectPaginator`
-    * `VueSelectPaginator`
-    
+* `SelectPaginator`
+* `VueSelectPaginator`
+
+#### SelectPaginator
+
 The `SelectPaginator` returns the following structure when `render()` method is called on its instance:
 
 ```html
@@ -62,6 +64,8 @@ $(function() {
 });
 ```
 
+#### VueSelectPaginator
+
 The `VueSelectPaginator` returns the following structure when `render()` method is called on its instance (all entities are decoded for clarity):
 
 ```html
@@ -87,7 +91,7 @@ And to support this implementation, there is a `VueJs` component that ships with
 ```javascript
 Vue.component('ssd-paginator', require('./components/Paginator/Select.vue'));
 ```
-To create your own implementations of `Pagination` simply use this class as parent and add required `html()` method.
+To create your own implementations of `Paginator` all you have to do is to provide implementation of the `html()` method, which should return the html structure of your pagination layout.
 
 ### Styling
 

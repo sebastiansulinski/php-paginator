@@ -78,7 +78,7 @@ class Pagination
      *
      * @return void
      */
-    private function setUp(): void
+    private function setUp()
     {
         $this->setQueryWithoutPageKey();
 
@@ -107,7 +107,7 @@ class Pagination
      *
      * @return void
      */
-    private function setNumberOfPages(): void
+    private function setNumberOfPages()
     {
         $this->number_of_pages = (int)ceil($this->number_of_records / $this->per_page);
     }
@@ -117,7 +117,7 @@ class Pagination
      *
      * @return void
      */
-    private function setCurrentPage(): void
+    private function setCurrentPage()
     {
         $this->current = $this->parseCurrentPage(
             $this->request->get($this->key)
@@ -173,7 +173,7 @@ class Pagination
      *
      * @return void
      */
-    private function setPreviousPage(): void
+    private function setPreviousPage()
     {
         $this->previous = $this->getPreviousPage();
     }
@@ -228,7 +228,7 @@ class Pagination
      *
      * @return void
      */
-    private function setNextPage(): void
+    private function setNextPage()
     {
         $this->next = $this->getNextPage();
     }
@@ -238,7 +238,7 @@ class Pagination
      *
      * @return void
      */
-    private function setQueryWithoutPageKey(): void
+    private function setQueryWithoutPageKey()
     {
         $this->query_without_page_key = array_filter(
             $this->request->query(),
