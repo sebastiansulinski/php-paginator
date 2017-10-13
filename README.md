@@ -154,7 +154,7 @@ foreach($paginator->records() as $record) {
 echo $paginator->render();
 ```
 
-### Manual pagination structure
+### Custom pagination structure
 
 If you don't want to use `Paginator` class implementation, the `Pagination` class has all necessary methods to allow you put together pagination structure directly in your view, for instance to display list of all pages as clickable numbers with current page highlighted using `class="active"`, you could do something like:
 
