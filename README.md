@@ -10,6 +10,10 @@ Light weight, easy drop-in pagination component for PHP 7 applications.
 composer require sebastiansulinski/php-paginator
 ```
 
+### PHP Versions
+
+Current version requires minimum PHP v7.1. If you need support for PHP v7.0, please use  v1.1.1.
+
 ### Structure
 
 The component consist of 2 main classes:
