@@ -12,7 +12,7 @@ composer require sebastiansulinski/php-paginator
 
 ### PHP Versions
 
-Current version requires minimum PHP v7.1. If you need support for PHP v7.0, please use  v1.1.1.
+Current version requires PHP 7.1+ - if you need support for PHP 7.0, please use v1.1.1.
 
 ### Structure
 
