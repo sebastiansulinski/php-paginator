@@ -78,7 +78,7 @@ class Pagination
      *
      * @return void
      */
-    private function setUp()
+    private function setUp(): void
     {
         $this->setQueryWithoutPageKey();
 
@@ -107,7 +107,7 @@ class Pagination
      *
      * @return void
      */
-    private function setNumberOfPages()
+    private function setNumberOfPages(): void
     {
         $this->number_of_pages = (int)ceil($this->number_of_records / $this->per_page);
     }
@@ -117,7 +117,7 @@ class Pagination
      *
      * @return void
      */
-    private function setCurrentPage()
+    private function setCurrentPage(): void
     {
         $this->current = $this->parseCurrentPage(
             $this->request->get($this->key)
@@ -130,7 +130,7 @@ class Pagination
      * @param  mixed|null $current_page
      * @return int
      */
-    private function parseCurrentPage($current_page = null)
+    private function parseCurrentPage($current_page = null): int
     {
         if (is_null($current_page) || ($current_page = (int)$current_page) < 1) {
             return 1;
@@ -173,7 +173,7 @@ class Pagination
      *
      * @return void
      */
-    private function setPreviousPage()
+    private function setPreviousPage(): void
     {
         $this->previous = $this->getPreviousPage();
     }
@@ -228,7 +228,7 @@ class Pagination
      *
      * @return void
      */
-    private function setNextPage()
+    private function setNextPage(): void
     {
         $this->next = $this->getNextPage();
     }
@@ -238,11 +238,11 @@ class Pagination
      *
      * @return void
      */
-    private function setQueryWithoutPageKey()
+    private function setQueryWithoutPageKey(): void
     {
         $this->query_without_page_key = array_filter(
             $this->request->query(),
-            function($key) {
+            function ($key) {
                 return $key !== $this->key;
             },
             ARRAY_FILTER_USE_KEY
@@ -442,7 +442,7 @@ class Pagination
      */
     public function urlList(): Collection
     {
-        return (new Collection(range(1, $this->numberOfPages())))->mapWithKeys(function(int $page) {
+        return (new Collection(range(1, $this->numberOfPages())))->mapWithKeys(function (int $page) {
             return [$page => $this->url($page)];
         });
     }
