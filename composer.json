@@ -10,11 +10,11 @@
     ],
     "require": {
         "php": "^7.1",
-        "illuminate/http": "^5.5",
-        "illuminate/support": "^5.5"
+        "illuminate/http": "^5.6",
+        "illuminate/support": "^5.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.4"
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
         "psr-4": {

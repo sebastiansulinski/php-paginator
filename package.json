@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/sebastiansulinski/php-paginator#readme",
   "devDependencies": {
-    "laravel-mix": "^1.7.2",
+    "laravel-mix": "^2.0.0",
     "vue": "^2.5.13"
   }
 }
