@@ -74,7 +74,7 @@ $(function() {
 
 The `VueSelectPaginator` returns the following structure when `render()` method is called on its instance (all entities are decoded for clarity):
 
-```html
+```
 <ssd-paginator 
     :options="{
         "1":"http://paginator.app",
