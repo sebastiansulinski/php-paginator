@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Illuminate\Support\Arr;
 use SSD\Paginator\Collection;
 use SSD\Paginator\Pagination;
 
@@ -347,7 +348,7 @@ class PaginationTest extends BaseCase
     {
         $params = ['page' => 1, 'id' => 223, 'q' => 'Some query'];
 
-        $query = http_build_query(array_merge($params, ['page' => 2]));
+        $query = Arr::query(array_merge($params, ['page' => 2]));
 
         $pagination = new Pagination(
             $this->get('/news', $params),
