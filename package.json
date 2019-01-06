@@ -1,6 +1,6 @@
 {
   "name": "php-paginator",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Framework agnostic PHP Pagination component",
   "scripts": {
     "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
