@@ -3,7 +3,7 @@
         <a :href="previous" class="paginator-button" v-if="!isFirst"><i class="fa fa-angle-left"></i></a>
         <span class="paginator-button disabled" v-if="isFirst"><i class="fa fa-angle-left"></i></span>
         <span class="paginator-label">Page</span>
-        <select @change="change()" v-model="paginator">
+        <select @change="change" v-model="paginator">
             <option v-for="(option, page) in options" :value="option" v-text="page"></option>
         </select>
         <span class="paginator-label" v-text="ofLabel"></span>
@@ -65,5 +65,5 @@
                 window.location.href = this.paginator;
             }
         }
-    };
+    }
 </script>

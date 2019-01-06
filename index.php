@@ -35,6 +35,8 @@ $vueSelectPaginator = new VueSelectPaginator($pagination, $chunk);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" rel="stylesheet">
     <link href="./resources/dist/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="./resources/dist/js/app.js" defer></script>
 </head>
 <body>
 
@@ -106,14 +108,5 @@ $vueSelectPaginator = new VueSelectPaginator($pagination, $chunk);
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="./resources/dist/js/app.js"></script>
-<script>
-    $(function() {
-        $('.ssd-paginator select').on('change', function() {
-            window.location.href = $(this).val();
-        });
-    });
-</script>
 </body>
 </html>
