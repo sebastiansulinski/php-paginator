@@ -152,12 +152,11 @@ class PaginatorTest extends BaseCase
             new Collection
         );
 
-        $this->assertContains($request->url(), $paginator->render());
-        $this->assertNotContains($request->fullUrlWithQuery(['page' => 1]), $paginator->render());
+        $this->assertStringContainsString($request->url(), $paginator->render());
 
-        $this->assertContains($request->fullUrlWithQuery(['page' => 2]), $paginator->render());
-        $this->assertContains($request->fullUrlWithQuery(['page' => 3]), $paginator->render());
-        $this->assertContains($request->fullUrlWithQuery(['page' => 4]), $paginator->render());
-        $this->assertNotContains($request->fullUrlWithQuery(['page' => 5]), $paginator->render());
+        $this->assertStringContainsString($request->fullUrlWithQuery(['page' => 2]), $paginator->render());
+        $this->assertStringContainsString($request->fullUrlWithQuery(['page' => 3]), $paginator->render());
+        $this->assertStringContainsString($request->fullUrlWithQuery(['page' => 4]), $paginator->render());
+        $this->assertStringNotContainsString($request->fullUrlWithQuery(['page' => 5]), $paginator->render());
     }
 }
