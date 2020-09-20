@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/sebastiansulinski/php-paginator#readme",
   "devDependencies": {
-    "laravel-mix": "^5.0.4",
+    "laravel-mix": "^5.0.5",
     "resolve-url-loader": "^3.1.1",
-    "sass": "^1.26.10",
-    "sass-loader": "^9.0.2",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11"
+    "sass": "^1.26.11",
+    "sass-loader": "^10.0.2",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
   }
 }
