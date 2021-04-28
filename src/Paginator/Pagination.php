@@ -169,6 +169,36 @@ class Pagination
     }
 
     /**
+     * Get previous page.
+     *
+     * @return int
+     */
+    public function previous(): int
+    {
+        return $this->previous;
+    }
+
+    /**
+     * Get next page.
+     *
+     * @return int
+     */
+    public function next(): int
+    {
+        return $this->next;
+    }
+
+    /**
+     * Get number of items per page.
+     *
+     * @return int
+     */
+    public function perPage(): int
+    {
+        return $this->per_page;
+    }
+
+    /**
      * Set previous page.
      *
      * @return void
@@ -374,7 +404,7 @@ class Pagination
      */
     private function urlWithoutPageKey(): string
     {
-        $queryString = http_build_query($this->query_without_page_key, '', '&');
+        $queryString = http_build_query($this->query_without_page_key);
 
         return $this->request->url().$this->withQuestion($queryString);
     }
@@ -442,8 +472,18 @@ class Pagination
      */
     public function urlList(): Collection
     {
-        return (new Collection(range(1, $this->numberOfPages())))->mapWithKeys(function (int $page) {
+        return $this->range()->mapWithKeys(function (int $page) {
             return [$page => $this->url($page)];
         });
+    }
+
+    /**
+     * Get range of pages.
+     *
+     * @return \SSD\Paginator\Collection
+     */
+    public function range(): Collection
+    {
+        return new Collection(range(1, $this->numberOfPages()));
     }
 }

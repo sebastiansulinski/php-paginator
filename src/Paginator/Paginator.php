@@ -2,6 +2,7 @@
 
 namespace SSD\Paginator;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 
 /**
@@ -9,7 +10,7 @@ use Illuminate\Support\Collection;
  *
  * @package SSD\Paginator
  */
-abstract class Paginator
+abstract class Paginator implements Arrayable
 {
     /**
      * @var \SSD\Paginator\Pagination
@@ -92,5 +93,23 @@ abstract class Paginator
     public function count(): int
     {
         return $this->pagination->numberOfRecords();
+    }
+
+    /**
+     * Get object as array.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'range' => $this->pagination->range(),
+            'current' => $this->pagination->current(),
+            'previous' => $this->pagination->previous(),
+            'next' => $this->pagination->next(),
+            'number_of_records' => $this->count(),
+            'number_of_pages' => $this->pagination->numberOfPages(),
+            'per_page' => $this->pagination->perPage(),
+        ];
     }
 }

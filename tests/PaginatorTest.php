@@ -159,4 +159,31 @@ class PaginatorTest extends BaseCase
         $this->assertStringContainsString($request->fullUrlWithQuery(['page' => 4]), $paginator->render());
         $this->assertStringNotContainsString($request->fullUrlWithQuery(['page' => 5]), $paginator->render());
     }
+
+    /**
+     * @test
+     */
+    public function returns_array_representation_of_the_object()
+    {
+        $request = $this->get('/', ['page' => 2]);
+
+        $paginator = new SelectPaginator(
+            new Pagination(
+                $request,
+                31,
+                10
+            ),
+            new Collection
+        );
+
+        $this->assertEquals([
+            'range' => new Collection([1, 2, 3, 4]),
+            'current' => 2,
+            'previous' => 1,
+            'next' => 3,
+            'number_of_records' => 31,
+            'number_of_pages' => 4,
+            'per_page' => 10,
+        ], $paginator->toArray());
+    }
 }
