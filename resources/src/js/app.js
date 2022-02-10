@@ -1,14 +1,6 @@
-import Vue from 'vue';
+import { createApp } from 'vue'
+import SsdPaginator from './components/SsdPaginator'
 
-Vue.component('ssd-paginator', require('./components/Paginator/Select.vue').default);
-
-new Vue({
-    el: '#app',
-    mounted() {
-        $(function() {
-            $('.ssd-paginator select').on('change', function() {
-                window.location.href = $(this).val();
-            });
-        });
-    }
-});
+createApp({
+  components: { SsdPaginator },
+}).mount('#app')

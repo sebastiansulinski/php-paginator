@@ -1,6 +1,6 @@
 # Framework agnostic PHP Pagination component
 
-Light weight, easy drop-in pagination component for PHP 7 applications.
+Light weight, easy drop-in pagination component for PHP 8 applications.
 
 [![Build Status](https://travis-ci.org/sebastiansulinski/php-paginator.svg?branch=master)](https://travis-ci.org/sebastiansulinski/php-paginator)
 
@@ -25,46 +25,7 @@ The component consist of 2 main classes:
     * instance of `Pagination`
     * records for a given page as instance of `SSD\Paginator\Collection` or `Illuminate\Support\Collection`
  
-Package comes with 2 implementations of `Paginator`:
-
-* `SelectPaginator`
-* `VueSelectPaginator`
-
-#### SelectPaginator
-
-The `SelectPaginator` returns the following structure when `render()` method is called on its instance:
-
-```html
-<form class="ssd-paginator">
-    <a href="http://paginator.app" class="paginator-button">
-        <i class="fa fa-angle-left"></i>
-    </a>
-    <span class="paginator-label">Page</span>
-    <select>
-        <option value="http://paginator.app">1</option>
-        <option value="http://paginator.app/?page=2" selected="selected">2</option>
-        <option value="http://paginator.app/?page=3">3</option>
-        <option value="http://paginator.app/?page=4">4</option>
-        <option value="http://paginator.app/?page=5">5</option>
-    </select>
-    <span class="paginator-label">of 5</span>
-    <a href="http://paginator.app/?page=3" class="paginator-button">
-        <i class="fa fa-angle-right"></i>
-    </a>
-</form>
-```
-
-And to make it work, you can support it with a simple `jQuery` such as:
-
-```javascript
-$(function() {
-    
-    $('.ssd-paginator select').on('change', function() {
-        window.location.href = $(this).val();
-    });
-    
-});
-```
+Package comes with one implementation of `Paginator`:
 
 #### VueSelectPaginator
 
@@ -88,16 +49,21 @@ The `VueSelectPaginator` returns the following structure when `render()` method 
 ></ssd-paginator>
 ```
 
-And to support this implementation, there is a `VueJs` component that ships with this package - you'll find it under `resources/src/js/components/Paginator/Select.vue` - you can attach it to your `Vue` instance as (replacing the path to the component with the correct one for your set up):
+And to support this implementation, there is a `VueJs` component that ships with this package - you'll find it under `resources/src/js/components/SsdPaginator`:
 
 ```javascript
-Vue.component('ssd-paginator', require('./components/Paginator/Select.vue'));
+import { createApp } from 'vue'
+import SsdPaginator from './components/SsdPaginator'
+
+createApp({
+  components: { SsdPaginator },
+}).mount('#app')
 ```
 To create your own implementations of `Paginator` all you have to do is to provide implementation of the `html()` method, which should return the html structure of your pagination layout.
 
 ### Styling
 
-Package comes with a `scss` and compiled `css` stylesheet to support the layout of the `Paginator` implementations that come with a package. Please check `resources/src/scss/app.scss` and `resources/dist/css/app.css`.
+SsdPaginator comes pre-formatted using tailwindcss v3, but you can replace its structure using the available slot and apply your own styling as required.
 
 ### Usage
 
@@ -107,7 +73,7 @@ Package comes with a `scss` and compiled `css` stylesheet to support the layout 
 use SSD\Paginator\Request;
 use SSD\Paginator\Collection;
 use SSD\Paginator\Pagination;
-use SSD\Paginator\SelectPaginator;
+use SSD\Paginator\VueSelectPaginator;
 
 // instantiate Pagination class
 
@@ -133,7 +99,7 @@ $chunk = $records->splice(
 
 // instantiate SelectPaginator with instance of Pagination and collection of records
 
-$paginator = new SelectPaginator($pagination, $chunk);
+$paginator = new VueSelectPaginator($pagination, $chunk);
 ```
 
 ### Displaying records and pagination
