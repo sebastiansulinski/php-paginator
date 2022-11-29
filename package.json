@@ -1,6 +1,6 @@
 {
   "name": "php-paginator",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Framework agnostic PHP Pagination component",
   "repository": {
     "type": "git",
