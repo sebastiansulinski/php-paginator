@@ -4,7 +4,7 @@ namespace Tests;
 
 use SSD\Paginator\Collection;
 use SSD\Paginator\Pagination;
-use SSD\Paginator\SelectPaginator;
+use SSD\Paginator\VueSelectPaginator;
 
 class PaginatorTest extends BaseCase
 {
@@ -13,7 +13,7 @@ class PaginatorTest extends BaseCase
      */
     public function returns_pagination_instance()
     {
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             $pagination = new Pagination(
                 $this->get('/', ['page' => 1]),
                 8,
@@ -32,7 +32,7 @@ class PaginatorTest extends BaseCase
      */
     public function returns_correct_records_collection()
     {
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             new Pagination(
                 $this->get('/', ['page' => 1]),
                 8,
@@ -44,7 +44,7 @@ class PaginatorTest extends BaseCase
         $this->assertSame($empty, $paginator->records());
 
 
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             new Pagination(
                 $this->get('/', ['page' => 1]),
                 8,
@@ -61,7 +61,7 @@ class PaginatorTest extends BaseCase
      */
     public function correctly_determines_whether_there_are_records_available()
     {
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             new Pagination(
                 $this->get('/', ['page' => 1]),
                 8,
@@ -73,7 +73,7 @@ class PaginatorTest extends BaseCase
         $this->assertFalse($paginator->hasRecords());
 
 
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             new Pagination(
                 $this->get('/', ['page' => 1]),
                 8,
@@ -90,7 +90,7 @@ class PaginatorTest extends BaseCase
      */
     public function returns_correct_total_number_of_records()
     {
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             new Pagination(
                 $this->get('/', ['page' => 1]),
                 187,
@@ -107,7 +107,7 @@ class PaginatorTest extends BaseCase
      */
     public function returns_empty_pagination_view_with_total_records_less_than_per_page()
     {
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             new Pagination(
                 $this->get('/', ['page' => 1]),
                 8,
@@ -124,7 +124,7 @@ class PaginatorTest extends BaseCase
      */
     public function returns_empty_pagination_view_with_total_records_matching_per_page()
     {
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             new Pagination(
                 $this->get('/', ['page' => 1]),
                 10,
@@ -143,7 +143,7 @@ class PaginatorTest extends BaseCase
     {
         $request = $this->get('/', ['page' => 1]);
 
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             new Pagination(
                 $request,
                 31,
@@ -152,12 +152,20 @@ class PaginatorTest extends BaseCase
             new Collection
         );
 
-        $this->assertStringContainsString($request->url(), $paginator->render());
+        $this->assertStringContainsString($request->url(), $rendered = $paginator->render());
 
-        $this->assertStringContainsString($request->fullUrlWithQuery(['page' => 2]), $paginator->render());
-        $this->assertStringContainsString($request->fullUrlWithQuery(['page' => 3]), $paginator->render());
-        $this->assertStringContainsString($request->fullUrlWithQuery(['page' => 4]), $paginator->render());
-        $this->assertStringNotContainsString($request->fullUrlWithQuery(['page' => 5]), $paginator->render());
+        $this->assertStringContainsString($this->purifyPath($request->fullUrlWithQuery(['page' => 2])), $rendered);
+        $this->assertStringContainsString($this->purifyPath($request->fullUrlWithQuery(['page' => 3])), $rendered);
+        $this->assertStringContainsString($this->purifyPath($request->fullUrlWithQuery(['page' => 4])), $rendered);
+        $this->assertStringNotContainsString($this->purifyPath($request->fullUrlWithQuery(['page' => 5])), $rendered);
+    }
+
+    /**
+     * Purify path ready for assertions.
+     */
+    private function purifyPath(string $string): string
+    {
+        return trim(json_encode($string), '"');
     }
 
     /**
@@ -167,7 +175,7 @@ class PaginatorTest extends BaseCase
     {
         $request = $this->get('/', ['page' => 2]);
 
-        $paginator = new SelectPaginator(
+        $paginator = new VueSelectPaginator(
             new Pagination(
                 $request,
                 31,
