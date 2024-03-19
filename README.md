@@ -2,8 +2,6 @@
 
 Light weight, easy drop-in pagination component for PHP 8 applications.
 
-[![Build Status](https://travis-ci.org/sebastiansulinski/php-paginator.svg?branch=master)](https://travis-ci.org/sebastiansulinski/php-paginator)
-
 ### Installation
 
 ```

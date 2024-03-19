@@ -1,10 +1,10 @@
 <?php
 
-require "../vendor/autoload.php";
+require '../vendor/autoload.php';
 
-use SSD\Paginator\Request;
 use SSD\Paginator\Collection;
 use SSD\Paginator\Pagination;
+use SSD\Paginator\Request;
 use SSD\Paginator\VueSelectPaginator;
 
 $pagination = new Pagination(

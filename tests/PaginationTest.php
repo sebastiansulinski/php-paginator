@@ -3,14 +3,13 @@
 namespace Tests;
 
 use Illuminate\Support\Arr;
+use PHPUnit\Framework\Attributes\Test;
 use SSD\Paginator\Collection;
 use SSD\Paginator\Pagination;
 
 class PaginationTest extends BaseCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function correctly_determines_whether_there_is_only_one_page()
     {
         $pagination = new Pagination(
@@ -21,7 +20,6 @@ class PaginationTest extends BaseCase
 
         $this->assertFalse($pagination->hasOnlyOnePage());
 
-
         $pagination = new Pagination(
             $this->get('/'),
             10,
@@ -31,9 +29,7 @@ class PaginationTest extends BaseCase
         $this->assertTrue($pagination->hasOnlyOnePage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function correctly_returns_current_page_as_first_when_there_are_not_enough_records()
     {
         $pagination = new Pagination(
@@ -45,7 +41,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals(1, $pagination->current());
 
-
         $pagination = new Pagination(
             $this->get('/', ['page' => 3]),
             20,
@@ -56,9 +51,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals(2, $pagination->current());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function converts_page_number_from_string_to_integer()
     {
         $pagination = new Pagination(
@@ -71,9 +64,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals(1, $pagination->current());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function converts_negative_page_number_to_first_page()
     {
         $pagination = new Pagination(
@@ -86,9 +77,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals(1, $pagination->current());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function correctly_returns_current_page_when_number_of_records_is_right()
     {
         $pagination = new Pagination(
@@ -101,9 +90,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals(3, $pagination->current());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function correctly_identifies_first_page()
     {
         $pagination = new Pagination(
@@ -115,7 +102,6 @@ class PaginationTest extends BaseCase
 
         $this->assertTrue($pagination->isFirstPage());
 
-
         $pagination = new Pagination(
             $this->get('/', ['page' => 2]),
             30,
@@ -126,9 +112,7 @@ class PaginationTest extends BaseCase
         $this->assertFalse($pagination->isFirstPage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function correctly_identifies_current_page()
     {
         $pagination = new Pagination(
@@ -140,7 +124,6 @@ class PaginationTest extends BaseCase
 
         $this->assertTrue($pagination->isCurrentPage(2));
 
-
         $pagination = new Pagination(
             $this->get('/', ['page' => 2]),
             30,
@@ -151,9 +134,7 @@ class PaginationTest extends BaseCase
         $this->assertFalse($pagination->isCurrentPage(3));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function correctly_identifies_last_page()
     {
         $pagination = new Pagination(
@@ -165,7 +146,6 @@ class PaginationTest extends BaseCase
 
         $this->assertTrue($pagination->isLastPage());
 
-
         $pagination = new Pagination(
             $this->get('/', ['page' => 2]),
             30,
@@ -176,9 +156,7 @@ class PaginationTest extends BaseCase
         $this->assertFalse($pagination->isLastPage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_offset()
     {
         $pagination = new Pagination(
@@ -190,7 +168,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals(0, $pagination->offset());
 
-
         $pagination = new Pagination(
             $this->get('/', ['page' => 2]),
             30,
@@ -200,7 +177,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals(10, $pagination->offset());
 
-
         $pagination = new Pagination(
             $this->get('/', ['page' => 3]),
             30,
@@ -209,7 +185,6 @@ class PaginationTest extends BaseCase
         );
 
         $this->assertEquals(20, $pagination->offset());
-
 
         $pagination = new Pagination(
             $this->get('/', ['page' => 4]),
@@ -221,9 +196,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals(20, $pagination->offset());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_limit()
     {
         $pagination = new Pagination(
@@ -236,9 +209,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals(12, $pagination->limit());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function correctly_returns_total_number_of_records()
     {
         $pagination = new Pagination(
@@ -250,9 +221,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals(187, $pagination->numberOfRecords());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function correctly_returns_number_of_pages()
     {
         $pagination = new Pagination(
@@ -264,9 +233,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals(11, $pagination->numberOfPages());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_key()
     {
         $pagination = new Pagination(
@@ -277,7 +244,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('page', $pagination->key());
 
-
         $pagination = new Pagination(
             $this->get('/', ['page' => 2]),
             30,
@@ -287,7 +253,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('id', $pagination->key());
         $this->assertEquals(1, $pagination->current());
-
 
         $pagination = new Pagination(
             $this->get('/', ['id' => 2]),
@@ -300,9 +265,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals(2, $pagination->current());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_url_for_page_number_within_available_page_range()
     {
         $pagination = new Pagination(
@@ -313,7 +276,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/news', $pagination->url(-1));
 
-
         $pagination = new Pagination(
             $this->get('/news'),
             30,
@@ -322,7 +284,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/news', $pagination->url(1));
 
-
         $pagination = new Pagination(
             $this->get('/news'),
             30,
@@ -330,7 +291,6 @@ class PaginationTest extends BaseCase
         );
 
         $this->assertEquals('http://localhost/news?page=2', $pagination->url(2));
-
 
         $pagination = new Pagination(
             $this->get('/news', ['id' => 3]),
@@ -341,9 +301,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals('http://localhost/news?id=3&page=3', $pagination->url(5));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_url_with_additional_parameters_in_the_query_string_replacing_page_number()
     {
         $params = ['page' => 1, 'id' => 223, 'q' => 'Some query'];
@@ -359,9 +317,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals('http://localhost/news?'.$query, $pagination->url(2));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_first_page_url()
     {
         $pagination = new Pagination(
@@ -372,7 +328,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/?id=23', $pagination->firstPageUrl());
 
-
         $pagination = new Pagination(
             $this->get('/news', ['page' => 2, 'id' => 23]),
             30,
@@ -381,7 +336,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/news?id=23', $pagination->firstPageUrl());
 
-
         $pagination = new Pagination(
             $this->get('/news', ['page' => -2, 'id' => 23]),
             30,
@@ -389,7 +343,6 @@ class PaginationTest extends BaseCase
         );
 
         $this->assertEquals('http://localhost/news?id=23', $pagination->firstPageUrl());
-
 
         $pagination = new Pagination(
             $this->get('/news'),
@@ -400,9 +353,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals('http://localhost/news', $pagination->firstPageUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_last_page_url()
     {
         $pagination = new Pagination(
@@ -413,7 +364,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/?id=23', $pagination->lastPageUrl());
 
-
         $pagination = new Pagination(
             $this->get('/'),
             10,
@@ -421,7 +371,6 @@ class PaginationTest extends BaseCase
         );
 
         $this->assertEquals('http://localhost', $pagination->lastPageUrl());
-
 
         $pagination = new Pagination(
             $this->get('/', ['page' => 4]),
@@ -432,9 +381,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals('http://localhost/?page=3', $pagination->lastPageUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_previous_url_with_additional_parameters_in_the_query_string()
     {
         $pagination = new Pagination(
@@ -445,7 +392,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/news?page=2&id=23', $pagination->previousUrl());
 
-
         $pagination = new Pagination(
             $this->get('/news', ['page' => 2, 'id' => 23]),
             30,
@@ -453,7 +399,6 @@ class PaginationTest extends BaseCase
         );
 
         $this->assertEquals('http://localhost/news?id=23', $pagination->previousUrl());
-
 
         $pagination = new Pagination(
             $this->get('/news', ['page' => 1, 'id' => 23]),
@@ -463,7 +408,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/news?id=23', $pagination->previousUrl());
 
-
         $pagination = new Pagination(
             $this->get('/news', ['id' => 23]),
             30,
@@ -472,7 +416,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/news?id=23', $pagination->previousUrl());
 
-
         $pagination = new Pagination(
             $this->get('/news', ['page' => 2]),
             30,
@@ -480,7 +423,6 @@ class PaginationTest extends BaseCase
         );
 
         $this->assertEquals('http://localhost/news', $pagination->previousUrl());
-
 
         $pagination = new Pagination(
             $this->get('/news'),
@@ -491,9 +433,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals('http://localhost/news', $pagination->previousUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_current_url()
     {
         $pagination = new Pagination(
@@ -504,7 +444,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/news', $pagination->currentUrl());
 
-
         $pagination = new Pagination(
             $this->get('/news', ['page' => 2]),
             30,
@@ -512,7 +451,6 @@ class PaginationTest extends BaseCase
         );
 
         $this->assertEquals('http://localhost/news?page=2', $pagination->currentUrl());
-
 
         $pagination = new Pagination(
             $this->get('/news', ['page' => 4]),
@@ -523,9 +461,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals('http://localhost/news?page=3', $pagination->currentUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_next_url()
     {
         $pagination = new Pagination(
@@ -536,7 +472,6 @@ class PaginationTest extends BaseCase
 
         $this->assertEquals('http://localhost/news', $pagination->nextUrl());
 
-
         $pagination = new Pagination(
             $this->get('/news', ['page' => 2]),
             30,
@@ -544,7 +479,6 @@ class PaginationTest extends BaseCase
         );
 
         $this->assertEquals('http://localhost/news?page=3', $pagination->nextUrl());
-
 
         $pagination = new Pagination(
             $this->get('/news', ['page' => 4]),
@@ -555,9 +489,7 @@ class PaginationTest extends BaseCase
         $this->assertEquals('http://localhost/news?page=3', $pagination->nextUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_url_list()
     {
         $pagination = new Pagination(

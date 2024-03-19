@@ -2,15 +2,14 @@
 
 namespace Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use SSD\Paginator\Collection;
 use SSD\Paginator\Pagination;
 use SSD\Paginator\VueSelectPaginator;
 
 class PaginatorTest extends BaseCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_pagination_instance()
     {
         $paginator = new VueSelectPaginator(
@@ -27,9 +26,7 @@ class PaginatorTest extends BaseCase
         $this->assertSame($pagination, $paginator->pagination());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_records_collection()
     {
         $paginator = new VueSelectPaginator(
@@ -43,7 +40,6 @@ class PaginatorTest extends BaseCase
 
         $this->assertSame($empty, $paginator->records());
 
-
         $paginator = new VueSelectPaginator(
             new Pagination(
                 $this->get('/', ['page' => 1]),
@@ -56,9 +52,7 @@ class PaginatorTest extends BaseCase
         $this->assertSame($records, $paginator->records());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function correctly_determines_whether_there_are_records_available()
     {
         $paginator = new VueSelectPaginator(
@@ -72,7 +66,6 @@ class PaginatorTest extends BaseCase
 
         $this->assertFalse($paginator->hasRecords());
 
-
         $paginator = new VueSelectPaginator(
             new Pagination(
                 $this->get('/', ['page' => 1]),
@@ -85,9 +78,7 @@ class PaginatorTest extends BaseCase
         $this->assertTrue($paginator->hasRecords());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_correct_total_number_of_records()
     {
         $paginator = new VueSelectPaginator(
@@ -102,9 +93,7 @@ class PaginatorTest extends BaseCase
         $this->assertEquals(187, $paginator->count());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_empty_pagination_view_with_total_records_less_than_per_page()
     {
         $paginator = new VueSelectPaginator(
@@ -119,9 +108,7 @@ class PaginatorTest extends BaseCase
         $this->assertEmpty($paginator->render());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_empty_pagination_view_with_total_records_matching_per_page()
     {
         $paginator = new VueSelectPaginator(
@@ -136,9 +123,7 @@ class PaginatorTest extends BaseCase
         $this->assertEmpty($paginator->render());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_pagination_view_with_correct_links()
     {
         $request = $this->get('/', ['page' => 1]);
@@ -168,9 +153,7 @@ class PaginatorTest extends BaseCase
         return trim(json_encode($string), '"');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_array_representation_of_the_object()
     {
         $request = $this->get('/', ['page' => 2]);

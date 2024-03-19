@@ -6,8 +6,6 @@ class VueSelectPaginator extends Paginator
 {
     /**
      * Get pagination html.
-     *
-     * @return string
      */
     protected function html(): string
     {
@@ -16,8 +14,6 @@ class VueSelectPaginator extends Paginator
 
     /**
      * Get component's attributes.
-     *
-     * @return string
      */
     private function attributes(): string
     {
@@ -31,7 +27,7 @@ class VueSelectPaginator extends Paginator
             'last' => $this->pagination->lastPageUrl(),
             ':number-of-pages' => $this->pagination->numberOfPages(),
 
-        ]))->map(function($value, string $key) {
+        ]))->map(function ($value, string $key) {
 
             return $key.'="'.$value.'"';
 

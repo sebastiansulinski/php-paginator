@@ -7,8 +7,6 @@ use Illuminate\Support\Collection;
 
 /**
  * Class View
- *
- * @package SSD\Paginator
  */
 abstract class Paginator implements Arrayable
 {
@@ -24,9 +22,6 @@ abstract class Paginator implements Arrayable
 
     /**
      * PaginationView constructor.
-     *
-     * @param  \SSD\Paginator\Pagination $pagination
-     * @param  \Illuminate\Support\Collection $records
      */
     public function __construct(Pagination $pagination, Collection $records)
     {
@@ -36,8 +31,6 @@ abstract class Paginator implements Arrayable
 
     /**
      * Get pagination html.
-     *
-     * @return string
      */
     public function render(): string
     {
@@ -50,15 +43,11 @@ abstract class Paginator implements Arrayable
 
     /**
      * Get pagination html.
-     *
-     * @return string
      */
     abstract protected function html(): string;
 
     /**
      * Get pagination instance.
-     *
-     * @return \SSD\Paginator\Pagination
      */
     public function pagination(): Pagination
     {
@@ -67,8 +56,6 @@ abstract class Paginator implements Arrayable
 
     /**
      * Get records.
-     *
-     * @return \Illuminate\Support\Collection
      */
     public function records(): Collection
     {
@@ -77,18 +64,14 @@ abstract class Paginator implements Arrayable
 
     /**
      * Check if there are any records.
-     *
-     * @return bool
      */
     public function hasRecords(): bool
     {
-        return !$this->records->isEmpty();
+        return ! $this->records->isEmpty();
     }
 
     /**
      * Get total number of records.
-     *
-     * @return int
      */
     public function count(): int
     {
@@ -97,8 +80,6 @@ abstract class Paginator implements Arrayable
 
     /**
      * Get object as array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

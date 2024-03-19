@@ -53,11 +53,6 @@ class Pagination
 
     /**
      * Pagination constructor.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $number_of_records
-     * @param  int $per_page
-     * @param  string $key
      */
     public function __construct(
         Request $request,
@@ -75,8 +70,6 @@ class Pagination
 
     /**
      * Set all properties.
-     *
-     * @return void
      */
     private function setUp(): void
     {
@@ -94,8 +87,6 @@ class Pagination
 
     /**
      * Check if there's only one page.
-     *
-     * @return bool
      */
     public function hasOnlyOnePage(): bool
     {
@@ -104,18 +95,14 @@ class Pagination
 
     /**
      * Set number of pages.
-     *
-     * @return void
      */
     private function setNumberOfPages(): void
     {
-        $this->number_of_pages = (int)ceil($this->number_of_records / $this->per_page);
+        $this->number_of_pages = (int) ceil($this->number_of_records / $this->per_page);
     }
 
     /**
      * Set current page.
-     *
-     * @return void
      */
     private function setCurrentPage(): void
     {
@@ -127,12 +114,11 @@ class Pagination
     /**
      * Parse current page.
      *
-     * @param  mixed|null $current_page
-     * @return int
+     * @param  mixed|null  $current_page
      */
     private function parseCurrentPage($current_page = null): int
     {
-        if (is_null($current_page) || ($current_page = (int)$current_page) < 1) {
+        if (is_null($current_page) || ($current_page = (int) $current_page) < 1) {
             return 1;
         }
 
@@ -141,9 +127,6 @@ class Pagination
 
     /**
      * Purify page number.
-     *
-     * @param  int $number
-     * @return int
      */
     private function purifyPageNumber(int $number): int
     {
@@ -160,8 +143,6 @@ class Pagination
 
     /**
      * Get current page.
-     *
-     * @return int
      */
     public function current(): int
     {
@@ -170,8 +151,6 @@ class Pagination
 
     /**
      * Get previous page.
-     *
-     * @return int
      */
     public function previous(): int
     {
@@ -180,8 +159,6 @@ class Pagination
 
     /**
      * Get next page.
-     *
-     * @return int
      */
     public function next(): int
     {
@@ -190,8 +167,6 @@ class Pagination
 
     /**
      * Get number of items per page.
-     *
-     * @return int
      */
     public function perPage(): int
     {
@@ -200,8 +175,6 @@ class Pagination
 
     /**
      * Set previous page.
-     *
-     * @return void
      */
     private function setPreviousPage(): void
     {
@@ -210,8 +183,6 @@ class Pagination
 
     /**
      * Get previous page.
-     *
-     * @return int
      */
     private function getPreviousPage(): int
     {
@@ -224,8 +195,6 @@ class Pagination
 
     /**
      * Check if current page is the first one.
-     *
-     * @return bool
      */
     public function isFirstPage(): bool
     {
@@ -234,9 +203,6 @@ class Pagination
 
     /**
      * Check if argument matches current page.
-     *
-     * @param  int $value
-     * @return bool
      */
     public function isCurrentPage(int $value): bool
     {
@@ -245,8 +211,6 @@ class Pagination
 
     /**
      * Check if current page is the last one.
-     *
-     * @return bool
      */
     public function isLastPage(): bool
     {
@@ -255,8 +219,6 @@ class Pagination
 
     /**
      * Set next page.
-     *
-     * @return void
      */
     private function setNextPage(): void
     {
@@ -265,8 +227,6 @@ class Pagination
 
     /**
      * Set query without page key.
-     *
-     * @return void
      */
     private function setQueryWithoutPageKey(): void
     {
@@ -281,8 +241,6 @@ class Pagination
 
     /**
      * Get next page.
-     *
-     * @return int
      */
     private function getNextPage(): int
     {
@@ -295,8 +253,6 @@ class Pagination
 
     /**
      * Get offset.
-     *
-     * @return int
      */
     public function offset(): int
     {
@@ -309,8 +265,6 @@ class Pagination
 
     /**
      * Get number of records per page.
-     *
-     * @return int
      */
     public function limit(): int
     {
@@ -319,8 +273,6 @@ class Pagination
 
     /**
      * Get total number of records.
-     *
-     * @return int
      */
     public function numberOfRecords(): int
     {
@@ -329,8 +281,6 @@ class Pagination
 
     /**
      * Get number of pages.
-     *
-     * @return int
      */
     public function numberOfPages(): int
     {
@@ -339,8 +289,6 @@ class Pagination
 
     /**
      * Get pagination key.
-     *
-     * @return string
      */
     public function key(): string
     {
@@ -349,9 +297,6 @@ class Pagination
 
     /**
      * Get url.
-     *
-     * @param  int $page_number
-     * @return string
      */
     public function url(int $page_number): string
     {
@@ -362,14 +307,12 @@ class Pagination
         }
 
         return $this->request->fullUrlWithQuery([
-            $this->key => $page_number
+            $this->key => $page_number,
         ]);
     }
 
     /**
      * Get first page url.
-     *
-     * @return string
      */
     public function firstPageUrl(): string
     {
@@ -383,14 +326,13 @@ class Pagination
     /**
      * Get question mark for query string.
      *
-     * @param  string|null $path
-     * @return string
+     * @param  string|null  $path
      */
     private function withQuestion($path): string
     {
         $uri = $this->request->getBaseUrl().$this->request->getPathInfo();
 
-        if (!$path) {
+        if (! $path) {
             return $uri.$path;
         }
 
@@ -399,8 +341,6 @@ class Pagination
 
     /**
      * Get url without page key in query string.
-     *
-     * @return string
      */
     private function urlWithoutPageKey(): string
     {
@@ -411,8 +351,6 @@ class Pagination
 
     /**
      * Get last page url.
-     *
-     * @return string
      */
     public function lastPageUrl(): string
     {
@@ -425,8 +363,6 @@ class Pagination
 
     /**
      * Get previous url.
-     *
-     * @return string
      */
     public function previousUrl(): string
     {
@@ -439,8 +375,6 @@ class Pagination
 
     /**
      * Get current url.
-     *
-     * @return string
      */
     public function currentUrl(): string
     {
@@ -453,8 +387,6 @@ class Pagination
 
     /**
      * Get next url.
-     *
-     * @return string
      */
     public function nextUrl(): string
     {
@@ -467,8 +399,6 @@ class Pagination
 
     /**
      * Get list of all urls.
-     *
-     * @return \SSD\Paginator\Collection
      */
     public function urlList(): Collection
     {
@@ -479,8 +409,6 @@ class Pagination
 
     /**
      * Get range of pages.
-     *
-     * @return \SSD\Paginator\Collection
      */
     public function range(): Collection
     {
